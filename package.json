@@ -6,7 +6,6 @@
   "engines": {
     "node": "14.17.3"
   },
-
   "scripts": {
     "start": "node backend/server.js",
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
@@ -25,16 +24,12 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.2",
+    "mongoose": "^5.13.7",
     "nodemailer": "^6.6.3",
-    "stripe": "^8.168.0",
+    "stripe": "^8.169.0",
     "validator": "^13.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
   }
-
-
-  
 }
-
