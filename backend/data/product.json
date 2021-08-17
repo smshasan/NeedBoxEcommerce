@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Wrist watch",
+        "price": "500",
+        "description": "dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "products/ljljljlwe",
+            "url": "https://m.media-amazon.com/images/I/91K9SyGiyzL._AC_SL1500_.jpg "
+        }
+    ],
+        "category": "Electronics",
+        "seller": "Ebay",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name": "Wrist watch",
+        "price": "111",
+        "description": "dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "products/ljljljlwe",
+            "url": "https://m.media-amazon.com/images/I/91K9SyGiyzL._AC_SL1500_.jpg"
+        }],
+        "category": "Electronics",
+        "seller": "Ebay",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    },
+    {
+        "name": "Wrist watch",
+        "price": "500",
+        "description": "dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text dummy text",
+        "ratings": 4.5,
+        "images": [{
+            "public_id": "products/ljljljlwe",
+            "url": "https://m.media-amazon.com/images/I/91K9SyGiyzL._AC_SL1500_.jpg"
+        }],
+        "category": "Electronics",
+        "seller": "Ebay",
+        "stock": 50,
+        "numOfReviews": 32,
+        "reviews": []
+    }
+]
+
+   
