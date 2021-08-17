@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Full ecommerce with mern",
   "main": "server.js",
+  "engines": {
+    "node": "14.17.3"
+  },
+
   "scripts": {
     "start": "node backend/server.js",
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
