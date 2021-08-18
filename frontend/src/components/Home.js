@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Pagination from 'react-js-pagination'
-import Slider from 'rc-slider'
+// import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css';
 import ImageSlider from './layout/ImageSlider'
 
@@ -60,7 +60,7 @@ const Home = ({ match }) => {
                         
                                 <div className="col-6  col-md-12">
                                     <div className = "row">
-                                        {products.map((product) => (
+                                        {products?.map((product) => (
 
                                             <Product key = {product?._id} product = {product} col = {3} />
 

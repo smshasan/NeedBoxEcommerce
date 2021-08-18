@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 
 
 import MetaData from '../layout/MetaData';
-import { useAlert } from 'react-alert';
+// import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { register, clearErrors } from '../../actions/userActions'
 
@@ -27,11 +27,16 @@ const Register = ({ history }) => {
 
     useEffect(() => {
         
+         if (error) {
+            alert(error);
+            dispatch(clearErrors());
+        }
+
         if (isAuthenticated) {
           history.push('/')
       }
 
-    }, [dispatch, isAuthenticated, history])
+    }, [dispatch, error, isAuthenticated, history])
 
     const submitHandler = (e) => {
         e.preventDefault();

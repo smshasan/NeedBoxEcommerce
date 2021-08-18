@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import Footer from "./components/layout/Footer";
+// import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
 
 
@@ -43,7 +43,7 @@ import ProductReviews from './components/admin/ProductReviews';
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import { loadUser } from './actions/userActions';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import store from './store';
 import axios from 'axios';
 
@@ -70,7 +70,7 @@ function App() {
 
   }, [])
 
-  const { user, loading } = useSelector(state => state.auth)
+  // const { user, loading } = useSelector(state => state.auth)
 
   return (
     <Router>

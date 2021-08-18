@@ -17,16 +17,16 @@ const ForgotPassword = () => {
 
     useEffect(() => {
 
-       /* if (error) {
-            alert.error(error);
+        if (error) {
+            alert(error);
             dispatch(clearErrors());
-        } */
+        } 
 
-       /* if (message) {
-            alert.success(message)
-        }*/
+       if (message) {
+            alert(message)
+        }
 
-    }, [dispatch, error])
+    }, [dispatch, error, message])
 
     const submitHandler = (e) => {
         e.preventDefault();

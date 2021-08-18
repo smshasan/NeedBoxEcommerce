@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react'
 import Pagination from 'react-js-pagination'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css';
-import Loader from './layout/Loader'
+//import Loader from './layout/Loader'
 
 
 
@@ -43,7 +43,7 @@ const SearchPage = ({ match }) => {
     //const alert = useAlert();
     const dispatch = useDispatch();
 
-    const { loading, products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
+    const { /*loading,*/ products, error, productsCount, resPerPage, filteredProductsCount } = useSelector(state => state.products)
 
     const keyword = match.params.keyword
 

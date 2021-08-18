@@ -18,17 +18,17 @@ const NewPassword = ({ history, match }) => {
 
     useEffect(() => {
 
-       /* if (error) {
-            alert.error(error);
+        if (error) {
+            alert(error);
             dispatch(clearErrors());
-        }*/
+        }
 
         if (success) {
            
             history.push('/login')
         }
 
-    }, [dispatch, alert, error, success, history])
+    }, [dispatch, error, success, history])
 
     const submitHandler = (e) => {
         e.preventDefault();

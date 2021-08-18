@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Carousel } from 'react-bootstrap'
 
-import Loader from '../components/layout/Loader'
+// import Loader from '../components/layout/Loader'
 import MetaData from '../components/layout/MetaData'
 import ListReviews from '../components/review/ListReviews'
 
@@ -20,7 +20,7 @@ const ProductDetails = ({ match }) => {
     const dispatch = useDispatch();
     //const alert = useAlert();
 
-    const { loading, error, product } = useSelector(state => state.productDetails)
+    const { /*loading,*/ error, product } = useSelector(state => state.productDetails)
     const { user } = useSelector(state => state.auth)
     const { error: reviewError, success } = useSelector(state => state.newReview)
 

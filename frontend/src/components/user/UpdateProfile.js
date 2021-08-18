@@ -29,13 +29,13 @@ const UpdateProfile = ({ history }) => {
             setAvatarPreview(user.avatar.url)
         }
 
-        /*if (error) {
-            alert.error(error);
+        if (error) {
+            alert(error);
             dispatch(clearErrors());
-        }*/
+        }
 
         if(isUpdated) {
-           // alert.success('User updated successfully')
+           alert('User updated successfully')
             
             dispatch(loadUser());
             
@@ -48,7 +48,7 @@ const UpdateProfile = ({ history }) => {
             })
         }
 
-    }, [dispatch, user, history, isUpdated])
+    }, [dispatch, user, error, history, isUpdated])
 
     const submitHandler = (e) => {
         e.preventDefault();

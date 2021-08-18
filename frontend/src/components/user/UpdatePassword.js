@@ -19,13 +19,13 @@ const UpdatePassword = ({ history }) => {
 
     useEffect(() => {
 
-       /* if (error) {
+       if (error) {
             alert.error(error);
             dispatch(clearErrors());
-        }*/
+        }
 
         if (isUpdated) {
-            alert.success('Password updated successfully')
+            alert('Password updated successfully')
 
             history.push('/me')
 
@@ -34,7 +34,7 @@ const UpdatePassword = ({ history }) => {
             })
         }
 
-    }, [dispatch, history, isUpdated])
+    }, [dispatch, error, history, isUpdated])
 
     const submitHandler = (e) => {
         e.preventDefault();
