@@ -1,9 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { Carousel } from 'react-bootstrap'
 
-// import Loader from '../components/layout/Loader'
+import Loader from '../components/layout/Loader'
 import MetaData from '../components/layout/MetaData'
 import ListReviews from '../components/review/ListReviews'
+
+
+//related products
+import Product from '../product/Product'
+import { getProducts } from '../actions/productActions'
 
 //import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,9 +25,12 @@ const ProductDetails = ({ match }) => {
     const dispatch = useDispatch();
     //const alert = useAlert();
 
-    const { /*loading,*/ error, product } = useSelector(state => state.productDetails)
+    const { loading, error, product } = useSelector(state => state.productDetails)
     const { user } = useSelector(state => state.auth)
     const { error: reviewError, success } = useSelector(state => state.newReview)
+
+
+    const { products, productsCount, resPerPage } = useSelector(state => state.products)
 
     useEffect(() => {
         dispatch(getProductDetails(match.params.id))
@@ -220,7 +228,29 @@ const ProductDetails = ({ match }) => {
 
                     {product.reviews && product.reviews.length > 0 && (
                         <ListReviews reviews={product.reviews} />
-                    )}
+                )}
+                
+                    <Fragment>
+                        <section id="products" className="container mt-5">
+                        
+                            <h1 id="products_heading">Latest Products</h1>
+                            <div className = "row">
+
+                            
+                                    <div className="col-6  col-md-12">
+                                        <div className = "row">
+                                            {products?.map((product) => (
+
+                                                <Product key = {product?._id} product = {product} col = {3} />
+                                                
+                                            ))}
+                            
+                                        </div>
+                                        
+                                    </div>
+                            </div>
+                        </section>
+                    </Fragment>
 
                 </Fragment>
             

@@ -18,6 +18,27 @@ const userSchema = new mongoose.Schema({
         unique: true,
         validate: [validator.isEmail, 'Please enter valid email']
     },
+
+    // phone: {
+    //     type: String,
+    //     unique: true,
+    //     minLength: [5, 'Phone Number must not be less than 11 digit'],
+    //     required: true
+    // },
+
+    // address: {
+    //     type: String,
+    //     maxLength: [100, 'address must not exceed 100 characters'],
+    //     required: true
+    // },
+
+    // shopAddress: {
+    //     type: String,
+    //     maxLength: [100, 'address must not exceed 100 characters'],
+    //     required: true
+
+    // },
+
     password: {
         type: String,
         required: [true, 'Please enter password'],
@@ -27,11 +48,11 @@ const userSchema = new mongoose.Schema({
     avatar: {
         public_id: {
             type: String,
-            required: true         
+            required: true        // true
         },
         url: {
             type: String,
-            required: true
+            required: true      // true
         }
     },
     role: {

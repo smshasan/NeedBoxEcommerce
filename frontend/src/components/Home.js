@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import Pagination from 'react-js-pagination'
-// import Slider from 'rc-slider'
+import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css';
 import ImageSlider from './layout/ImageSlider'
 
@@ -25,7 +25,7 @@ const Home = ({ match }) => {
 
     const { products, error, productsCount, resPerPage } = useSelector(state => state.products)
     
-    
+    console.log('products', products)
 
     useEffect(() => {
        
@@ -63,8 +63,9 @@ const Home = ({ match }) => {
                                         {products?.map((product) => (
 
                                             <Product key = {product?._id} product = {product} col = {3} />
-
+                                            
                                         ))}
+                          
                                     </div>
                                     
                                 </div>
@@ -93,6 +94,3 @@ const Home = ({ match }) => {
 }
 
 export default Home
-
-
-

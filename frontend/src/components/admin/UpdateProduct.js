@@ -43,6 +43,10 @@ const UpdateProduct = ({ match, history }) => {
     const { error, product } = useSelector(state => state.productDetails)
     const { loading, error: updateError, isUpdated } = useSelector(state => state.product);
 
+    // For vendors
+    const { user } = useSelector(state => state.auth)
+
+
     const productId = match.params.id;
 
     useEffect(() => {
@@ -71,12 +75,13 @@ const UpdateProduct = ({ match, history }) => {
 
 
         if (isUpdated) {
-            history.push('/admin/products');
+            if (user.role === 'admin') history.push('/admin/products');
+            else if (user.role === 'vendor') history.push('/vendor/products');
             alert('Product updated successfully');
             dispatch({ type: UPDATE_PRODUCT_RESET })
         }
 
-    }, [dispatch, error, isUpdated, history, updateError, product, productId])
+    }, [dispatch, error, isUpdated, user.role, history, updateError, product, productId])
 
 
     const submitHandler = (e) => {

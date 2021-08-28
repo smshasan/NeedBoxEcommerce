@@ -19,6 +19,10 @@ const ProductsList = ({ history }) => {
     const { loading, error, products } = useSelector(state => state.products);
     const { error: deleteError, isDeleted } = useSelector(state => state.product)
 
+    // For vendors
+    const { user } = useSelector(state => state.auth)
+
+
     useEffect(() => {
         dispatch(getAdminProducts());
 
@@ -38,7 +42,12 @@ const ProductsList = ({ history }) => {
             dispatch({ type: DELETE_PRODUCT_RESET })
         }
 
-    }, [dispatch,  error, deleteError, isDeleted, history])
+    }, [dispatch, error, deleteError, isDeleted, history])
+    
+    // For vendors
+     const filterProduct = () => {
+            return products.filter((x) => x.user === user._id)
+    }
 
     const setProducts = () => {
         const data = {
@@ -71,7 +80,8 @@ const ProductsList = ({ history }) => {
             rows: []
         }
 
-        products.forEach(product => {
+        if (user.role === 'admin') {
+            products.forEach(product => {
             data.rows.push({
                 id: product._id,
                 name: product.name,
@@ -87,6 +97,41 @@ const ProductsList = ({ history }) => {
                 </Fragment>
             })
         })
+        } else if (user.role === 'vendor') {
+            filterProduct().forEach(product => {
+            data.rows.push({
+                id: product._id,
+                name: product.name,
+                price: `$${product.price}`,
+                stock: product.stock,
+                actions: <Fragment>
+                    <Link to={`/vendor/product/${product._id}`} className="btn btn-primary py-1 px-2">
+                        <i className="fa fa-pencil"></i>
+                    </Link>
+                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProductHandler(product._id)}>
+                        <i className="fa fa-trash"></i>
+                    </button>
+                </Fragment>
+            })
+        })
+        }
+
+        // products.forEach(product => {
+        //     data.rows.push({
+        //         id: product._id,
+        //         name: product.name,
+        //         price: `$${product.price}`,
+        //         stock: product.stock,
+        //         actions: <Fragment>
+        //             <Link to={`/admin/product/${product._id}`} className="btn btn-primary py-1 px-2">
+        //                 <i className="fa fa-pencil"></i>
+        //             </Link>
+        //             <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteProductHandler(product._id)}>
+        //                 <i className="fa fa-trash"></i>
+        //             </button>
+        //         </Fragment>
+        //     })
+        // })
 
         return data;
     }

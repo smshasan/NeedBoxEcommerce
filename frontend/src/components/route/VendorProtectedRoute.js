@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
-const ProtectedRoute = ({ isAdmin, isVendor, component: Component, ...rest }) => {
+const VendorProtectedRoute = ({ isVendor, component: Component, ...rest }) => {
 
     const { isAuthenticated, loading, user } = useSelector(state => state.auth)
 
@@ -15,13 +15,11 @@ const ProtectedRoute = ({ isAdmin, isVendor, component: Component, ...rest }) =>
                         if (isAuthenticated === false) {
                             return <Redirect to='/login' />
                         }
-                        if (isAdmin === true && isVendor === false && user.role !== 'admin') {
+                       
+
+                        if (isVendor === true && user.role !== 'vendor') {
                             return <Redirect to="/" />
                         }
-                        if (isVendor === true && isAdmin === false && user.role !== 'vendor') {
-                             return <Redirect to="/" />
-                        }
-
 
                         return <Component {...props} />
                     }}
@@ -31,4 +29,5 @@ const ProtectedRoute = ({ isAdmin, isVendor, component: Component, ...rest }) =>
     )
 }
 
-export default ProtectedRoute
+export default VendorProtectedRoute
+

@@ -29,6 +29,17 @@ import UpdatePassword from './components/user/UpdatePassword';
 import ForgotPassword from './components/user/ForgotPassword';
 import NewPassword from './components/user/NewPassword';
 
+
+
+// vendor
+import LoginVendor from './components/vendor/LoginVendor'
+import VendorRegistration from './components/vendor/VendorRegistration'
+import VendorList from './components/vendor/VendorList'
+import VendorsDashboard from './components/vendor/VendorsDashboard'
+
+
+
+
 // Admin imports 
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
@@ -42,6 +53,8 @@ import ProductReviews from './components/admin/ProductReviews';
 
 
 import ProtectedRoute from './components/route/ProtectedRoute';
+import VendorProtectedRoute from './components/route/VendorProtectedRoute';
+
 import { loadUser } from './actions/userActions';
 // import { useSelector } from 'react-redux';
 import store from './store';
@@ -83,6 +96,8 @@ function App() {
             <Route path="/product/:id" component={ProductDetails} exact />
           
             <Route path="/Cart" component={Cart} exact />
+
+          
             <ProtectedRoute path="/shipping" component={Shipping} />
             <ProtectedRoute path="/order/confirm" component={ConfirmOrder} />
             <ProtectedRoute path="/success" component={OrderSuccess} />
@@ -96,6 +111,10 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           
+          <Route path="/loginVendor" component={LoginVendor} />
+          <Route path="/vendorRegistration" component={VendorRegistration} />
+          
+          
             <Route path="/password/forgot" component={ForgotPassword} exact />
             <Route path="/password/reset/:token" component={NewPassword} exact />
            
@@ -105,9 +124,17 @@ function App() {
             <ProtectedRoute path="/password/update" component={UpdatePassword} exact />
             <Route path="/orders/me" component={ListOrders} exact />
             <Route path="/order/:id" component={OrderDetails} exact />
-         </div>
-        <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
-        <ProtectedRoute path="/admin/products" isAdmin={true} component={ProductsList} exact />
+        </div>
+        
+
+
+        
+
+
+        <ProtectedRoute path="/dashboard" isAdmin={true}  component={Dashboard} exact />
+
+        
+        <ProtectedRoute path="/admin/products" isAdmin={true}  component={ProductsList} exact />
         <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />
         <ProtectedRoute path="/admin/product/:id" isAdmin={true} component={UpdateProduct} exact />
         <ProtectedRoute path="/admin/orders" isAdmin={true} component={OrdersList} exact />
@@ -115,6 +142,18 @@ function App() {
         <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
         <ProtectedRoute path="/admin/user/:id" isAdmin={true} component={UpdateUser} exact />
         <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ProductReviews} exact />
+
+
+        {/* Vendors Route */}
+
+        <ProtectedRoute path="/dashboard/vendor" isVendor={true}  component={VendorsDashboard} exact /> 
+        <ProtectedRoute path="/vendor/products" isVendor={true} component={ProductsList} exact />
+        <ProtectedRoute path="/vendor/product" isVendor={true} component={NewProduct} exact />
+        <ProtectedRoute path="/vendor/product/:id" isVendor={true} component={UpdateProduct} exact />
+        <ProtectedRoute path="/vendor/vendorsList" isVendor={true} component={VendorList} exact />
+        <ProtectedRoute path="/vendor/orders" isVendor={true} component={OrdersList} exact />
+        <ProtectedRoute path="/vendor/order/:id" isVendor={true} component={ProcessOrder} exact />
+        <ProtectedRoute path="/vendor/reviews" isVendor={true} component={ProductReviews} exact />
         
         
       </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import MetaData from '../layout/MetaData'
 //import Loader from '../layout/Loader'
 
-import Sidebar from './Sidebar'
+import Sidebar from '../admin/Sidebar'
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,7 +12,7 @@ import { getAdminProducts } from '../../actions/productActions'
 import { allOrders } from '../../actions/orderActions'
 import { allUsers } from '../../actions/userActions'
 
-const Dashboard = () => {
+const VendorsDashboard = () => {
 
     const dispatch = useDispatch();
 
@@ -21,18 +21,37 @@ const Dashboard = () => {
     const { orders, totalAmount, /*loading */ } = useSelector(state => state.allOrders)
      const { user, loading } = useSelector(state => state.auth)
 
-    let outOfStock = 0;
-    products.forEach(product => {
-        if (product.stock === 0) {
-            outOfStock += 1;
-        }
-    })
+    
 
     useEffect(() => {
         dispatch(getAdminProducts())
         dispatch(allOrders())
         dispatch(allUsers())
     }, [dispatch])
+
+
+    //filter product for vendor
+    const filterProduct = () => {
+            return products.filter((x) => x.user === user._id)
+    }
+    //filter orders for vendor
+    const orderFilter = () => {
+            return orders.filter((x) => x.user === user._id)
+    }
+    
+    //determining numbers of outOfStock products
+    let outOfStock = 0;
+    filterProduct().forEach(product => {
+        if (product.stock === 0) {
+            outOfStock += 1;
+        }
+    })
+    // const filterOrder = () => {
+    //     return orders.filter((y) => y.user === user._id)
+    // }
+
+    console.log('userRole', user.role)
+    console.log('orders', orders)
 
     return (
         <Fragment>
@@ -61,12 +80,12 @@ const Dashboard = () => {
                             </div>
 
                             <div className="row pr-4">
-                                <div className="col-xl-3 col-sm-6 mb-3">
+                                <div className="col-xl-4 col-sm-6 mb-3">
                                     <div className="card text-white bg-success o-hidden h-100">
                                         <div className="card-body">
-                                        <div className="text-center card-font-size">Products<br /> <b>{products && products.length} </b></div>
+                                        <div className="text-center card-font-size">Products<br /> <b>{filterProduct().length} </b></div>
                                         </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/products">
+                                        <Link className="card-footer text-white clearfix small z-1" to="/vendor/products">
                                             <span className="float-left">View Details</span>
                                             <span className="float-right">
                                                 <i className="fa fa-angle-right"></i>
@@ -76,12 +95,12 @@ const Dashboard = () => {
                                 </div>
 
 
-                                <div className="col-xl-3 col-sm-6 mb-3">
+                                <div className="col-xl-4 col-sm-6 mb-3">
                                     <div className="card text-white bg-danger o-hidden h-100">
                                         <div className="card-body">
-                                        <div className="text-center card-font-size">Orders<br /> <b>{orders && orders.length}</b></div>
+                                        <div className="text-center card-font-size">Orders<br /> <b>{orderFilter.length}</b></div>
                                         </div>
-                                        <Link className="card-footer text-white clearfix small z-1" to="/admin/orders">
+                                        <Link className="card-footer text-white clearfix small z-1" to="/vendor/orders">
                                             <span className="float-left">View Details</span>
                                             <span className="float-right">
                                                 <i className="fa fa-angle-right"></i>
@@ -112,7 +131,7 @@ const Dashboard = () => {
                             
 
 
-                                <div className="col-xl-3 col-sm-6 mb-3">
+                                <div className="col-xl-4 col-sm-12 mb-3">
                                     <div className="card text-white bg-warning o-hidden h-100">
                                         <div className="card-body">
                                             <div className="text-center card-font-size">Out of Stock<br /> <b>{outOfStock}</b></div>
@@ -130,4 +149,4 @@ const Dashboard = () => {
     )
 }
 
-export default Dashboard
+export default VendorsDashboard

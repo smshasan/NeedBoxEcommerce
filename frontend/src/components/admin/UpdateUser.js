@@ -24,7 +24,7 @@ const UpdateUser = ({ history, match }) => {
 
     useEffect(() => {
 
-        console.log(user && user._id !== userId);
+        console.log('checking:',user && user._id !== userId);
         if (user && user._id !== userId) {
             dispatch(getUserDetails(userId))
         } else {
@@ -112,6 +112,7 @@ const UpdateUser = ({ history, match }) => {
                                     >
                                         <option value="user">user</option>
                                         <option value="admin">admin</option>
+                                        <option value="vendor">vendor</option>
                                     </select>
                                 </div>
 

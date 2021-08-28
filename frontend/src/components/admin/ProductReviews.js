@@ -19,6 +19,10 @@ const ProductReviews = () => {
 
     const { /*loading,*/ error, reviews } = useSelector(state => state.productReviews);
     const { isDeleted, error: deleteError } = useSelector(state => state.review)
+    
+    // For vendors
+    const { user } = useSelector(state => state.auth)
+
 
     useEffect(() => {
 
@@ -93,7 +97,7 @@ const ProductReviews = () => {
                 user: review.name,
 
                 actions:
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteReviewHandler(review._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" disabled={user.role==='vendor'} onClick={() => deleteReviewHandler(review._id)} >
                          <i className="fa fa-trash"></i>
                     </button>
             })

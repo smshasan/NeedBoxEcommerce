@@ -31,6 +31,12 @@ const Header = () => {
                             <img className="logoSize" src="/images/needboxbdlogo.png" alt="logo" />
                         </Link>
                     </div>
+                    <div>
+                        <Link to="/loginVendor" style={{ textDecoration: 'none' }} >
+                             <span id="cart" className="ml-3">Become a Seller</span>
+                        </Link>
+                    </div>
+
                 </div>
 
                 <div className="col-12 col-md-6 mt-2 mt-md-0">
@@ -38,6 +44,9 @@ const Header = () => {
                 </div>
 
                 <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
+
+                    
+
                     <Link to="/cart" style={{ textDecoration: 'none' }} >
                         <span id="cart" className="ml-3">Cart</span>
                         <span className="ml-1" id="cart_count">{cartItems.length}</span>
@@ -59,9 +68,34 @@ const Header = () => {
 
                             <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
 
-                                {user && user.role === 'admin' && (
+                                {user && user.role === 'admin'  && (
                                     <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
                                 )}
+
+
+                                {user && user.role === 'vendor' && (
+                                    <Link className="dropdown-item" to="/dashboard/vendor">Dashboard</Link>
+                                )}
+
+
+
+                                {/* {user && (user.role === 'admin' || user.role === 'vendor') && (
+                                    <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
+                                )} */}
+
+
+
+
+
+
+
+
+                                {/* if(user){
+                                    if(user.role === 'admin' || user.role === 'vendor'){
+                                        <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
+                                    }
+                                } */}
+
                                 <Link className="dropdown-item" to="/orders/me">Orders</Link>
                                 <Link className="dropdown-item" to="/me">Profile</Link>
                                 <Link className="dropdown-item text-danger" to="/" onClick={logoutHandler}>

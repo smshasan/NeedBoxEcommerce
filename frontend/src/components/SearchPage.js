@@ -161,6 +161,7 @@ const SearchPage = ({ match }) => {
                                                 <Product key={product._id} product={product} col={4} />
                                             ))}
                                         </div>
+                                    
                                     </div>
                                 </Fragment>
                             ) : (

@@ -63,6 +63,7 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
         resPerPage,
         filteredProductsCount,
         products
+        
     })
 })
 
@@ -91,6 +92,10 @@ exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
         product
     })
 })
+
+
+
+
 
 //update  products => /api/v1/admin/product/:id 
 exports.updateProduct = catchAsyncErrors(async (req, res, next) => {

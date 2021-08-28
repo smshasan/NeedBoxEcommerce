@@ -19,6 +19,9 @@ const OrdersList = ({ history }) => {
     const { loading, error, orders } = useSelector(state => state.allOrders);
     const { isDeleted } = useSelector(state => state.order)
 
+    //for vendors 
+    const { user } = useSelector(state => state.auth)
+
     useEffect(() => {
         dispatch(allOrders());
 
@@ -37,6 +40,11 @@ const OrdersList = ({ history }) => {
 
     const deleteOrderHandler = (id) => {
         dispatch(deleteOrder(id))
+    }
+
+   // For vendors
+     const filterOrder = () => {
+            return orders.filter((x) => x.user === user._id)
     }
 
     const setOrders = () => {
@@ -70,7 +78,8 @@ const OrdersList = ({ history }) => {
             rows: []
         }
 
-        orders.forEach(order => {
+        if (user.role === 'admin') {
+             orders.forEach(order => {
             data.rows.push({
                 id: order._id,
                 numofItems: order.orderItems.length,
@@ -88,9 +97,30 @@ const OrdersList = ({ history }) => {
                 </Fragment>
             })
         })
-
+        } else if (user.role === 'vendor') {
+               filterOrder().forEach(order => {
+                    data.rows.push({
+                    id: order._id,
+                    numofItems: order.orderItems.length,
+                    amount: `$${order.totalPrice}`,
+                    status: order.orderStatus && String(order.orderStatus).includes('Delivered')
+                        ? <p style={{ color: 'green' }}>{order.orderStatus}</p>
+                        : <p style={{ color: 'red' }}>{order.orderStatus}</p>,
+                    actions: <Fragment>
+                        <Link to={`/vendor/order/${order._id}`} className="btn btn-primary py-1 px-2">
+                            <i className="fa fa-eye"></i>
+                        </Link>
+                        <button className="btn btn-danger py-1 px-2 ml-2" onClick = {() => deleteOrderHandler(order._id)}>
+                            <i className="fa fa-trash"></i>
+                        </button>
+                    </Fragment>
+                })
+            })
+        } else <h1>No Orders</h1>
         return data;
+       
     }
+     console.log('userRole', user.role);
 
 
     return (

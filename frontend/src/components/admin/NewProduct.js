@@ -39,6 +39,9 @@ const NewProduct = ({ history }) => {
     const dispatch = useDispatch();
 
     const { loading, error, success } = useSelector(state => state.newProduct);
+    // For vendors
+    const { user } = useSelector(state => state.auth)
+
 
     useEffect(() => {
 
@@ -48,12 +51,13 @@ const NewProduct = ({ history }) => {
         }
 
         if (success) {
-            history.push('/admin/products');
+            if (user.role === 'admin') history.push('/admin/products');
+            if (user.role==='vendor') history.push('/vendor/products');
             alert('Product created successfully');
             dispatch({ type: NEW_PRODUCT_RESET })
         }
 
-    }, [dispatch,  error, success, history])
+    }, [dispatch,  error, success, user.role, history])
 
     const submitHandler = (e) => {
         e.preventDefault();

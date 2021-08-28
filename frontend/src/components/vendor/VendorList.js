@@ -4,14 +4,14 @@ import { MDBDataTable } from 'mdbreact'
 
 import MetaData from '../layout/MetaData'
 import Loader from '../layout/Loader'
-import Sidebar from './Sidebar'
+import Sidebar from '../admin/Sidebar'
 
 //import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { allUsers, deleteUser, clearErrors } from '../../actions/userActions'
  import { DELETE_USER_RESET } from '../../constants/userConstants'
 
-const UsersList = ({ history }) => {
+const VendorList = ({ history }) => {
 
     //const alert = useAlert();
     const dispatch = useDispatch();
@@ -40,6 +40,8 @@ const UsersList = ({ history }) => {
     }
     
     console.log('users', users)
+    console.log('usersRole', users.role)
+
     const setUsers = () => {
         const data = {
             columns: [
@@ -71,7 +73,14 @@ const UsersList = ({ history }) => {
             rows: []
         }
 
-        users.forEach(user => {
+       
+        const filterVendor = () => {
+            return users.filter((x) => x.role === 'vendor')
+        }
+        console.log('vendor', filterVendor())
+
+
+        filterVendor().forEach(user => {
             data.rows.push({
                 id: user._id,
                 name: user.name,
@@ -89,6 +98,24 @@ const UsersList = ({ history }) => {
             })
         })
 
+        // users.forEach(user => {
+        //     data.rows.push({
+        //         id: user._id,
+        //         name: user.name,
+        //         email: user.email,
+        //         role: user.role,
+        //         actions: <Fragment>
+        //             <Link to={`/admin/user/${user._id}`} className="btn btn-primary py-1 px-2">
+        //                 <i className="fa fa-pencil"></i>
+        //             </Link>
+        //             <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user._id)}>
+        //                 <i className="fa fa-trash"></i>
+        //             </button>
+        //         </Fragment>
+
+        //     })
+        // })
+
         return data;
     }
 
@@ -103,7 +130,7 @@ const UsersList = ({ history }) => {
 
                 <div className="col-12 col-md-10">
                     <Fragment>
-                        <h1 className="my-5">All Users</h1>
+                        <h1 className="my-5">All Vendors</h1>
 
                         {loading ? <Loader /> : (
                             <MDBDataTable
@@ -123,4 +150,4 @@ const UsersList = ({ history }) => {
     )
 }
 
-export default UsersList
+export default VendorList

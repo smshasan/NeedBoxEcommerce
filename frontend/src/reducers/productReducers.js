@@ -295,6 +295,7 @@ export const reviewReducer = (state = {}, action) => {
         case DELETE_REVIEW_FAIL:
             return {
                 ...state,
+                
                 error: action.payload
             }
 
