@@ -33,27 +33,10 @@ const productSchema = new mongoose.Schema({
             },
         }
     ],
+    // 
     category: {
-        type: String,
-        required: [true, 'Please select category for this product'],
-        enum: {
-            values: [
-                'Electronics',
-                'Cameras',
-                'Laptop',
-                'Accessories',
-                'Headphones',
-                'Food',
-                'Books',
-                'Clothes/Shoes',
-                'Beauty/Health',
-                'Sports',
-                'Outdoor',
-                'Home',
-                'Fruits'
-            ],
-            message: 'Please select correct category for product'
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category'
     },
     seller: {
         type: String,

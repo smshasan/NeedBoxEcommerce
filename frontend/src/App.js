@@ -3,7 +3,14 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 // import Footer from "./components/layout/Footer";
 import Header from "./components/layout/Header";
+import MenuHeader from "./components/layout/MenuHeader";
 
+
+import ProductListPage from './components/ProductListPage';
+
+
+
+import HomePage from './components/HomePage';
 
 import Home from "./components/Home";
 import SearchPage from './components/SearchPage';
@@ -63,6 +70,7 @@ import axios from 'axios';
 // Payment
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
+import Category from './components/category/index.js';
 
 
 
@@ -89,9 +97,18 @@ function App() {
     <Router>
       <div className="App">
         <Header />
+        <MenuHeader />
            
-          <div className="cotainer container-fluid">
-            <Route path="/" component={Home} exact />
+        <div className="cotainer container-fluid">
+          
+            <Route path ="/:slug"  component={ProductListPage} exact />
+
+          
+          <Route path="/" component={HomePage} exact />
+          
+
+            {/* <Route path="/" component={Home} exact /> */}
+          
             <Route path="/search/:keyword" component = {SearchPage}  />
             <Route path="/product/:id" component={ProductDetails} exact />
           
@@ -131,8 +148,10 @@ function App() {
         
 
 
-        <ProtectedRoute path="/dashboard" isAdmin={true}  component={Dashboard} exact />
-
+        <ProtectedRoute path="/dashboard" isAdmin={true} component={Dashboard} exact />
+        
+        <ProtectedRoute path = "/category" isAdmin={true} component={Category}  exact />
+        
         
         <ProtectedRoute path="/admin/products" isAdmin={true}  component={ProductsList} exact />
         <ProtectedRoute path="/admin/product" isAdmin={true} component={NewProduct} exact />

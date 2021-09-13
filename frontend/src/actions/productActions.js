@@ -28,10 +28,43 @@ import {
     DELETE_REVIEW_REQUEST,
     DELETE_REVIEW_SUCCESS,
     DELETE_REVIEW_FAIL,
+    GET_PRODUCTS_BY_SLUG,
+
+    GET_PRODUCTS_BY_SLUG_REQUEST,
+    GET_PRODUCTS_BY_SLUG_SUCCESS,
+    GET_PRODUCTS_BY_SLUG_FAIL,
+
     CLEAR_ERRORS
 
 
 } from '../constants/productConstants';
+
+
+export const getProductsBySlug = (slug) => {
+    return async (dispatch) => {
+        try {
+            dispatch({ type: GET_PRODUCTS_BY_SLUG_REQUEST });
+            const { data } = await axios.get(`/api/v1/products/${slug}`);
+            console.log('slug', data);
+     
+            dispatch({
+                type: GET_PRODUCTS_BY_SLUG_SUCCESS,
+                payload: data
+            })   
+        } 
+         catch (error) {
+            dispatch({
+                type: GET_PRODUCTS_BY_SLUG_FAIL,
+                payload: error.response.data.message
+        });
+        }
+       
+            
+        }
+
+       
+     }
+ 
 
 export const getProducts = (keyword = '', currentPage = 1, price, category, ratings = 0) => async (dispatch) => {
     try {

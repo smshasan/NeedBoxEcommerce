@@ -34,6 +34,7 @@ const ProductDetails = ({ match }) => {
 
     useEffect(() => {
         dispatch(getProductDetails(match.params.id))
+        dispatch(getProducts(match.params.category))
 
         if (error) {
             alert(error);
@@ -50,7 +51,7 @@ const ProductDetails = ({ match }) => {
             dispatch({ type: NEW_REVIEW_RESET })
         }
 
-    }, [dispatch,  error, reviewError, match.params.id, success])
+    }, [dispatch,  error, reviewError, match.params.id, match.params.category, success])
 
     const addToCart = () => {
         dispatch(addItemToCart(match.params.id, quantity));
@@ -123,6 +124,10 @@ const ProductDetails = ({ match }) => {
         formData.set('productId', match.params.id);
 
         dispatch(newReview(formData));
+    }
+
+     const filterProduct = () => {
+            return products.filter((x) => x.pro )
     }
 
     return (
@@ -233,13 +238,13 @@ const ProductDetails = ({ match }) => {
                     <Fragment>
                         <section id="products" className="container mt-5">
                         
-                            <h1 id="products_heading">Latest Products</h1>
+                            <h1 id="products_heading">Related Products</h1>
                             <div className = "row">
 
                             
                                     <div className="col-6  col-md-12">
                                         <div className = "row">
-                                            {products?.map((product) => (
+                                            {products.filter((x)=>x.category).map((product) => (
 
                                                 <Product key = {product?._id} product = {product} col = {3} />
                                                 

@@ -8,42 +8,52 @@ import { useDispatch, useSelector } from 'react-redux'
 import { newProduct, clearErrors } from '../../actions/productActions'
 import { NEW_PRODUCT_RESET } from '../../constants/productConstants'
 
+import { getAllCategory } from "../../actions/categoryActions";
+
 const NewProduct = ({ history }) => {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
     const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
+    // const [category, setCategory] = useState('');
     const [stock, setStock] = useState(0);
     const [seller, setSeller] = useState('');
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([])
 
-    const categories = [
-        'Electronics',
-        'Cameras',
-        'Laptops',
-        'Accessories',
-        'Headphones',
-        'Food',
-        "Books",
-        'Clothes/Shoes',
-        'Beauty/Health',
-        'Sports',
-        'Outdoor',
-        'Home',
-        'Fruits'
-    ]
+    const [categoryId, setCategoryId] = useState('');
+
+    // const categories = [
+    //     'Electronics',
+    //     'Cameras',
+    //     'Laptops',
+    //     'Accessories',
+    //     'Headphones',
+    //     'Food',
+    //     "Books",
+    //     'Clothes/Shoes',
+    //     'Beauty/Health',
+    //     'Sports',
+    //     'Outdoor',
+    //     'Home',
+    //     'Fruits'
+    // ]
 
     //const alert = useAlert();
     const dispatch = useDispatch();
 
     const { loading, error, success } = useSelector(state => state.newProduct);
+    const category = useSelector((state) => state.category);
+
+    console.log('categoryinproduct', category);
+
     // For vendors
     const { user } = useSelector(state => state.auth)
 
 
     useEffect(() => {
+
+        dispatch(getAllCategory());
 
         if (error) {
             alert(error);
@@ -66,7 +76,7 @@ const NewProduct = ({ history }) => {
         formData.set('name', name);
         formData.set('price', price);
         formData.set('description', description);
-        formData.set('category', category);
+        formData.set('category', categoryId);
         formData.set('stock', stock);
         formData.set('seller', seller);
 
@@ -97,6 +107,22 @@ const NewProduct = ({ history }) => {
             reader.readAsDataURL(file)
         })
     }
+
+    const createCategoryList = (categories, options = []) => {
+    for (let category of categories) {
+      options.push({
+        value: category._id,
+        name: category.name,
+        // parentId: category.parentId,
+        // type: category.type
+      });
+      if (category.children.length > 0) {
+        createCategoryList(category.children, options);
+      }
+    }
+
+    return options;
+  };
 
 
     return (
@@ -142,12 +168,26 @@ const NewProduct = ({ history }) => {
 
                                 <div className="form-group">
                                     <label htmlFor="category_field">Category</label>
-                                    <select className="form-control" id="category_field" value={category} onChange={(e) => setCategory(e.target.value)}>
+
+                                     <select
+                                        className="form-control"
+                                        value={categoryId}
+                                        onChange={(e) => setCategoryId(e.target.value)}
+                                    >
+                                        <option>select category</option>
+                                        {createCategoryList(category.categories).map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.name}
+                                        </option>
+                                        ))}
+                                    </select>
+
+                                    {/* <select className="form-control" id="category_field" value={category} onChange={(e) => setCategory(e.target.value)}>
                                         {categories.map(category => (
                                             <option key={category} value={category} >{category}</option>
                                         ))}
 
-                                    </select>
+                                    </select> */}
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="stock_field">Stock</label>

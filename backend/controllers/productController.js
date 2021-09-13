@@ -4,6 +4,7 @@ const ErrorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures');
 const cloudinary = require('cloudinary');
+const Category = require('../models/category');
 
 
 // Create new product => /api/v1/admin/product/new
@@ -39,6 +40,28 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
         product
     })
 })
+
+// Get products by slug
+exports.getProductsBySlug = (req, res) => {
+    const { slug } = req.params;
+    Category.findOne({ slug: slug })
+        .select('_id')
+        .exec((error, category) => {
+            if (error) return res.status(400).json({ error });
+
+            if (category) {
+                Product.find({ category: category._id })
+                    .exec((error, products) => {
+                        res.status(200).json({ products });
+                    })
+            }
+                
+
+            // res.status(200).json({ category });
+    })
+}
+
+
 
 //Get all the products displaying form database => /api/v1/products?keyword = apple
 exports.getProducts = catchAsyncErrors(async (req, res, next) => {

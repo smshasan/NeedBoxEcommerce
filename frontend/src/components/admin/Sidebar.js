@@ -52,6 +52,13 @@ const Sidebar = () => {
                             )}
                         </ul>
                     </li>
+                    {user && user.role === 'admin' && (
+                         <li>
+                        <Link to = "/category"><img src="https://img.icons8.com/ios/20/000000/category.png" style={{Color:'white'}} alt="categoryIcon"/>Category</Link>
+                    </li>
+
+                            ) }
+                   
 
                     {user && user.role === 'admin' && (
                         <li>

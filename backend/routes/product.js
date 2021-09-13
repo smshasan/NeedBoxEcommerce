@@ -8,6 +8,7 @@ const {
     getSingleProduct,
     updateProduct,
     deleteProduct,
+    getProductsBySlug
     
     
 
@@ -16,6 +17,9 @@ const {
 
 const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth');
 
+
+//router.get("/products/:slug", getProductsBySlug);
+router.route('/products/:slug').get(getProductsBySlug);
 
 router.route('/products').get(getProducts);
 router.route('/admin/products').get(getAdminProducts);
