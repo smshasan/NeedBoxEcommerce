@@ -36,7 +36,7 @@ const initState = {
       myCategories.push({
         ...cat,
         children:
-          cat.children.length > 0
+          cat.children 
             ? [...cat.children, newCategory]
             : [newCategory]
       });

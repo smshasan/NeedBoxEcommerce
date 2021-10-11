@@ -14,6 +14,7 @@ const NewProduct = ({ history }) => {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
+    const [discount, setDiscount] = useState(0);
     const [description, setDescription] = useState('');
     // const [category, setCategory] = useState('');
     const [stock, setStock] = useState(0);
@@ -75,6 +76,7 @@ const NewProduct = ({ history }) => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('price', price);
+        formData.set('discount', discount);
         formData.set('description', description);
         formData.set('category', categoryId);
         formData.set('stock', stock);
@@ -158,6 +160,16 @@ const NewProduct = ({ history }) => {
                                         className="form-control"
                                         value={price}
                                         onChange={(e) => setPrice(e.target.value)}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="discount_field">Discount</label>
+                                    <input
+                                        type="text"
+                                        id="discount_field"
+                                        className="form-control"
+                                        value={discount}
+                                        onChange={(e) => setDiscount(e.target.value)}
                                     />
                                 </div>
 

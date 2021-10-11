@@ -58,6 +58,9 @@ import UsersList from './components/admin/UsersList';
 import UpdateUser from './components/admin/UpdateUser';
 import ProductReviews from './components/admin/ProductReviews';
 
+//Discount imports
+import Discount from './components/discount/Discount';
+
 
 import ProtectedRoute from './components/route/ProtectedRoute';
 import VendorProtectedRoute from './components/route/VendorProtectedRoute';
@@ -71,6 +74,7 @@ import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js'
 import { loadStripe } from '@stripe/stripe-js'
 import Category from './components/category/index.js';
+import Footer from './components/layout/footer/Footer';
 
 
 
@@ -161,6 +165,8 @@ function App() {
         <ProtectedRoute path="/admin/users" isAdmin={true} component={UsersList} exact />
         <ProtectedRoute path="/admin/user/:id" isAdmin={true} component={UpdateUser} exact />
         <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ProductReviews} exact />
+        <ProtectedRoute path="/vendor/vendorsList" isAdmin={true} component={VendorList} exact />
+        <ProtectedRoute path="/admin/discount" isAdmin={true} component={Discount} exact />
 
 
         {/* Vendors Route */}
@@ -169,12 +175,12 @@ function App() {
         <ProtectedRoute path="/vendor/products" isVendor={true} component={ProductsList} exact />
         <ProtectedRoute path="/vendor/product" isVendor={true} component={NewProduct} exact />
         <ProtectedRoute path="/vendor/product/:id" isVendor={true} component={UpdateProduct} exact />
-        <ProtectedRoute path="/vendor/vendorsList" isVendor={true} component={VendorList} exact />
+       
         <ProtectedRoute path="/vendor/orders" isVendor={true} component={OrdersList} exact />
         <ProtectedRoute path="/vendor/order/:id" isVendor={true} component={ProcessOrder} exact />
         <ProtectedRoute path="/vendor/reviews" isVendor={true} component={ProductReviews} exact />
         
-        
+        <Footer />
       </div>
     </Router>
   );

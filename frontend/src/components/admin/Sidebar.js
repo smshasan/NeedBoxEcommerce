@@ -101,6 +101,12 @@ const Sidebar = () => {
                             <Link to="/vendor/vendorsList"><i className="fa fa-users"></i> Vendors </Link>
                         </li>
                     )}
+
+                    {user && user.role === 'admin' && (
+                        <li>
+                            <Link to ="/admin/discount">Discount</Link>
+                        </li>
+                    )}
                     
                 </ul>
             </nav>

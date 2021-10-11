@@ -12,6 +12,7 @@ const UpdateProduct = ({ match, history }) => {
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState(0);
+    const [discount, setDiscount] = useState(0);
     const [description, setDescription] = useState('');
     const [category, setCategory] = useState('');
     const [stock, setStock] = useState(0);
@@ -56,6 +57,7 @@ const UpdateProduct = ({ match, history }) => {
         } else {
             setName(product.name);
             setPrice(product.price);
+            setDiscount(product.discount);
             setDescription(product.description);
             setCategory(product.category);
             setSeller(product.seller);
@@ -90,6 +92,7 @@ const UpdateProduct = ({ match, history }) => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('price', price);
+        formData.set('discount', discount);
         formData.set('description', description);
         formData.set('category', category);
         formData.set('stock', stock);
@@ -160,6 +163,18 @@ const UpdateProduct = ({ match, history }) => {
                                         onChange={(e) => setPrice(e.target.value)}
                                     />
                                 </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="discount_field">Discount</label>
+                                    <input
+                                        type="text"
+                                        id="discount_field"
+                                        className="form-control"
+                                        value={discount}
+                                        onChange={(e) => setDiscount(e.target.value)}
+                                    />
+                                </div>
+
 
                                 <div className="form-group">
                                     <label htmlFor="description_field">Description</label>

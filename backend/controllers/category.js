@@ -5,14 +5,18 @@ const cloudinary = require('cloudinary');
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 // const category = require("../models/category");
 
-function createCategories(categories, parentId = null) {
+function createCategories(categories, parentId = "") {
   const categoryList = [];
-  let category;
-  if (parentId == null) {
-    category = categories.filter((cat) => cat.parentId == undefined);
-  } else {
-    category = categories.filter((cat) => cat.parentId == parentId);
-  }
+  var category;
+  if (parentId != null) category = categories.filter(cat => cat.parentId == parentId);
+  if (parentId === "") category = categories.filter(cat => cat.parentId === "" )
+  
+
+  // if (parentId == null) {
+  //   category = categories.filter(cat => cat.parentId == "");
+  // } else {
+  //   category = categories.filter(cat => cat.parentId == parentId);
+  // }
 
   for (let cate of category) {
     categoryList.push({
@@ -33,64 +37,6 @@ function createCategories(categories, parentId = null) {
 
 exports.addCategory = catchAsyncErrors( async (req, res, next) => {
 
-  // const categoryObj = {
-  //   name: req.body.name,
-
-  //   slug: `${slugify(req.body.name)}-${shortid.generate()}`,
-  //   createdBy: req.user._id,
-  // };
-
-  // // '/public/'+
-  // // if (req.file) {
-  // //   categoryObj.categoryImage = process.env.API +  req.file.filename;
-  // // }
-
-
-  // let images = []
-  //   if (typeof req.body.images === 'string') {
-  //       images.push(req.body.images)
-  //   } else {
-  //       images = req.body.images
-  //   }
-
-  //    let imagesLinks = [];
-
-  //   for (let i = 0; i < images.length; i++) {
-  //       const result = await cloudinary.v2.uploader.upload(images[i], {
-  //           folder: 'categories'
-  //       });
-
-  //       imagesLinks.push({
-  //           public_id: result.public_id,
-  //           url: result.secure_url
-  //       })
-  //   }
-
-  //   req.body.images = imagesLinks
-
-
-
-  // // Previous
-  // // if (req.file) {
-  // //   categoryObj.categoryImage = "/public/" + req.file.filename;
-  // // }
-
-
-  // if (req.file) {
-  //   categoryObj.images = req.body.images;
-  // }
-
-  // if (req.body.parentId) {
-  //   categoryObj.parentId = req.body.parentId;
-  // }
-
-  // const cat = new Category(categoryObj);
-  // cat.save((error, category) => {
-  //   if (error) return res.status(400).json({ error });
-  //   if (category) {
-  //     return res.status(201).json({ category });
-  //   }
-  // })
 
   let images = []
     if (typeof req.body.images === 'string') {

@@ -5,23 +5,20 @@ const ImageSlider = () => {
     return (
         <React.Fragment>
             {/* <!-- Image Slider Starts --> */}
-            <div className="container">
+            <div className="container" style={{ paddingLeft: 0, paddingRight:0}}>
                 <div id="amazonImageSlider" className="carousel slide" data-ride="carousel">
                     <div className="carousel-inner">
+                    
                         <div className="carousel-item ">
-                            <Link to="/"><img src="/images/sliderImages/Slider1.jpg" className="d-block w-100" height="300" alt="slide image 01" /></Link>
+                            <Link to="/"><img src="/images/sliderImages/Slider2.jpg" className="d-block w-100" height="250" alt="slide image 02" /></Link>
                         </div>
                     
                         <div className="carousel-item ">
-                            <Link to="/"><img src="/images/sliderImages/Slider2.jpg" className="d-block w-100" height="300" alt="slide image 02" /></Link>
-                        </div>
-                    
-                        <div className="carousel-item ">
-                            <Link to="/"><img src="/images/sliderImages/Slider3.jpg" className="d-block w-100" height="300" alt="slide image 03" /></Link>
+                            <Link to="/"><img src="/images/sliderImages/Slider3.jpg" className="d-block w-100" height="250" alt="slide image 03" /></Link>
                         </div>
                         
                         <div className="carousel-item active">
-                            <Link to="/"><img src="/images/sliderImages/Slider4.jpg" className="d-block w-100" height="300" alt="slide image 04" /></Link>
+                            <Link to="/"><img src="/images/sliderImages/Slider4.jpg" className="d-block w-100" height="250" alt="slide image 04" /></Link>
                         </div>
                     
                     </div>

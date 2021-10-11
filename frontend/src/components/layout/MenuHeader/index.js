@@ -31,18 +31,24 @@ const MenuHeader = () => {
             <ul>{renderCategories(category.children)}</ul>
           ) : null}
         </li>
+        
       );
-    }
+            console.log('childlength', category.children.length )
+
+      }
+      
     return myCategoriess;
   };
 
     return (
-        <Fragment>
+      <Fragment>
+        <div className="container">
             <div className="menuHeader">
                 <ul>
                     {category.categories.length > 0 ? renderCategories(category.categories) : null}
                 </ul>
             </div>
+        </div>
         </Fragment>
         
     )

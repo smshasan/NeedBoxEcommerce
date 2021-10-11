@@ -49,7 +49,7 @@ export const productSlugReducers =  (state = { products: [] }, action) => {
 
           return {
               loading: false,
-              error: action.payload.error
+              error: action.payload
           }
        default:
             return state;

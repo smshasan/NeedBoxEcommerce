@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import { Link } from 'react-router-dom'
 
 const product = ({ product, col }) => {
@@ -16,9 +16,20 @@ const product = ({ product, col }) => {
                                             <div className="rating-inner" style={{width: `${
                                         (product.ratings / 5) * 100}%`}}></div>
                                     </div>
-                                    <span id="no_of_reviews">({product.numOfReviews}Reviews)</span>
+                                    <span id="no_of_reviews">({product.numOfReviews} Reviews)</span>
                                 </div>
-                                <p className="card-text">৳{product.price}</p>
+                    
+                    {product.discount > 0 ?
+                        <Fragment>
+                            <strong>Special Price</strong>
+                            <p className="card-text">৳{product.price - product.discount} <del style={{fontSize: '1rem', color:'#878787'}}>৳{product.price}</del> <small style={{color:'#26a541', fontSize: '1rem'}}>{product.discount}% off</small></p>
+                            {/* <del><p className="card-text">৳{product.price}</p></del> */}
+                           
+                        </Fragment>
+                        :
+                        <p className="card-text">৳{product.price}</p>
+                        
+                    }
                                 <Link to={`/product/${product._id}`} id="view_btn" className="btn btn-block">View Details </Link>
                             </div>
                         </div>
