@@ -7,11 +7,11 @@ import Product from '../../product/Product'
 const ProductListPage = (props) => {
 
     
-    const product= useSelector(state => state.productsss);
+    const {products}= useSelector(state => state.productsss);
     //  console.log('sec', useSelector(state => state.productsBySlug))
 
     const dispatch = useDispatch();
-      console.log('ppp', product);
+      console.log('ppp', products);
     
     useEffect(() => {
         const { match } = props;
@@ -34,7 +34,7 @@ const ProductListPage = (props) => {
           
                                 <div className="col-12  col-md-12">
                                     <div className = "row">
-                                        {product.products.map((product) => (
+                                        {products && products.map((product) => (
 
                                             <Product key = {product._id} product = {product} col = {3} />
                                             

@@ -5,6 +5,7 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures');
 const cloudinary = require('cloudinary');
 const Category = require('../models/category');
+const { updateMany } = require('../models/product');
 
 
 // Create new product => /api/v1/admin/product/new
@@ -53,6 +54,35 @@ exports.getProductsBySlug = (req, res) => {
                 Product.find({ category: category._id })
                     .exec((error, products) => {
                         res.status(200).json({ products });
+                    })
+            }
+                
+
+            // res.status(200).json({ category });
+    })
+}
+
+//discount by category
+exports.getDiscountBySlug = (req, res) => {
+    const { slug } = req.params;
+    Category.findOne({ slug: slug })
+        .select('_id')
+        .exec((error, category) => {
+            if (error) return res.status(400).json({ error });
+
+            if (category) {
+                Product.find({ category: category._id })
+                    .exec((error, products) => {
+                        products.forEach(product => {
+                            
+                            product.update(product.discount = req.body.discount);
+                            product.save();
+                            
+                        })
+                        res.status(200).json({
+                            success: true,
+                            products
+                        });
                     })
             }
                 

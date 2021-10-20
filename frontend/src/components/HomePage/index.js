@@ -10,7 +10,6 @@ const HomePage = () => {
   const category = useSelector((state) => state.category)
   const dispatch = useDispatch()
 
-  // const childrenFilter = categories.filter((category) => category.children.length > 0)
 
   useEffect(() => {
     dispatch(getAllCategory())
@@ -26,7 +25,7 @@ const HomePage = () => {
         image: category.images[0].url,
         slug: category.slug,
 
-        // type: category.type
+        
       })
       if (category.children.length > 0) {
         createCategoryList(category.children, options)
@@ -35,36 +34,7 @@ const HomePage = () => {
     return options
   }
 
-  //  const childrenFilter = () => {
-  //      return category.categories.filter(x => x.children.length === 0)
-
-  //     }
-  // console.log("catchild", category.categories.children)
-  // console.log('childrenFilter', childrenFilter())
-
-  //     const renderCategories = (categories) => {
-  //     let myCategoriess = [];
-  //     for (let category of categories) {
-  //       myCategoriess.push(
-  //         <li key={category.name}>
-
-  //           {
-  //             category.parentId  && category.children.length > 0 && <a href={category.slug}>{category.name}</a>
-
-  //           }
-
-  //           </li>
-
-  //         );
-
-  //         console.log('childrenlength', category.children.length )
-  //         }
-
-  //     return myCategoriess;
-  //   };
-
-  //   console.log('frontCategory', category)
-
+ 
   return (
     <Fragment>
       <div>
@@ -94,43 +64,12 @@ const HomePage = () => {
                     </div>
               ))}
               
-                  {/* <CardGroup>
-                      {createCategoryList(category.categories)
-          .filter((x) => x.children.length === 0)
-          .map((option) => (
-              <Card style={{width:'22rem'}} >
-                <Link to={`/${option.slug}`}>
-                  <Card.Img variant="top" src={option.image} />
-                </Link>
-                <Card.Body>
-                  <Card.Title>{option.name}</Card.Title>
-
-                  <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-              </Card>
-              ))}
-              </CardGroup>      */}
+                 
                 </div>
               </div>
             </Fragment>
           
-        {/* {createCategoryList(category.categories)
-            .filter((x) => x.children.length === 0)
-            .map((option) => (
-              <li
-                key={option.value}
-                value={option.value}
-                style={{ display: 'inline-flex' }}
-              >
-                <Fragment>
-                  <Link to={`/${option.slug}`}>
-                    {' '}
-                    <img src={option.image} />
-                  </Link>
-                  {option.name}
-                </Fragment>
-              </li>
-            ))} */}
+        
       </div>
     </Fragment>
   )

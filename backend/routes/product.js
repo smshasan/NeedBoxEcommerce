@@ -8,7 +8,8 @@ const {
     getSingleProduct,
     updateProduct,
     deleteProduct,
-    getProductsBySlug
+    getProductsBySlug,
+    getDiscountBySlug
     
     
 
@@ -20,6 +21,7 @@ const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth');
 
 //router.get("/products/:slug", getProductsBySlug);
 router.route('/products/:slug').get(getProductsBySlug);
+router.route('/discount/:slug').post(getDiscountBySlug);
 
 router.route('/products').get(getProducts);
 router.route('/admin/products').get(getAdminProducts);

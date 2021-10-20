@@ -104,7 +104,7 @@ const Sidebar = () => {
 
                     {user && user.role === 'admin' && (
                         <li>
-                            <Link to ="/admin/discount">Discount</Link>
+                            <Link to ="/admin/discount"><i className="fa fa-percent"></i>Discount</Link>
                         </li>
                     )}
                     

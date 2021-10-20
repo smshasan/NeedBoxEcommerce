@@ -12,12 +12,18 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please enter name'],
         maxLength: [30, 'Your name cannot exceed 30 characters']
     },
-    email: {
+    phone: {
         type: String,
         required: [true, 'Please enter email'],
-        unique: true,
-        validate: [validator.isEmail, 'Please enter valid email']
+        unique: true
+        // validate: [validator.isEmail, 'Please enter valid email']
     },
+    // email: {
+    //     type: String,
+    //     required: [true, 'Please enter email'],
+    //     unique: true,
+    //     validate: [validator.isEmail, 'Please enter valid email']
+    // },
 
     // phone: {
     //     type: String,

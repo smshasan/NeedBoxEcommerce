@@ -59,6 +59,7 @@ import UpdateUser from './components/admin/UpdateUser';
 import ProductReviews from './components/admin/ProductReviews';
 
 //Discount imports
+import SubCategoryForDiscount from './components/discount/subCategoryForDiscount';
 import Discount from './components/discount/Discount';
 
 
@@ -102,7 +103,8 @@ function App() {
       <div className="App">
         <Header />
         <MenuHeader />
-           
+        <HomePage />
+       
         <div className="cotainer container-fluid">
           
             <Route path ="/:slug"  component={ProductListPage} exact />
@@ -166,7 +168,8 @@ function App() {
         <ProtectedRoute path="/admin/user/:id" isAdmin={true} component={UpdateUser} exact />
         <ProtectedRoute path="/admin/reviews" isAdmin={true} component={ProductReviews} exact />
         <ProtectedRoute path="/vendor/vendorsList" isAdmin={true} component={VendorList} exact />
-        <ProtectedRoute path="/admin/discount" isAdmin={true} component={Discount} exact />
+        <ProtectedRoute path="/admin/discount" isAdmin={true} component={SubCategoryForDiscount} exact />
+        <ProtectedRoute path="/admin/discountOfCategory/:slug" isAdmin={true} component = {Discount} exact />
 
 
         {/* Vendors Route */}

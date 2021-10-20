@@ -10,7 +10,7 @@ import { login, clearErrors } from '../../actions/userActions'
 
 const Login = ({ history, location }) => {
 
-    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
 
    // const alert = useAlert();
@@ -18,24 +18,24 @@ const Login = ({ history, location }) => {
 
     const { isAuthenticated, error, loading } = useSelector(state => state.auth);
 
-    const redirect = location.search ? location.search.split('=')[1] : '/'
+    // const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
 
-        if (isAuthenticated) {
-            history.push(redirect)
-        }
+        // if (isAuthenticated) {
+        //     history.push(redirect)
+        // }
 
         if (error) {
             alert(error);
             dispatch(clearErrors());
         }
 
-    }, [dispatch,  isAuthenticated,  redirect, error, history])
+    }, [dispatch,  isAuthenticated, error, history]) //redirect
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(login(email, password))
+        dispatch(login(phone, password))
     }
 
     return (
@@ -49,13 +49,13 @@ const Login = ({ history, location }) => {
                             <form className="shadow-lg" onSubmit={submitHandler}>
                                 <h1 className="mb-3">Login</h1>
                                 <div className="form-group">
-                                    <label htmlFor="email_field">Email</label>
+                                    <label htmlFor="email_field">Phone</label>
                                     <input
-                                        type="email"
-                                        id="email_field"
+                                        type="text"
+                                        id="phone_field"
                                         className="form-control"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
                                     />
                                 </div>
 

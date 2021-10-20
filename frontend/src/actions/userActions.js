@@ -41,7 +41,7 @@ import {
 } from '../constants/userConstants'
 
 // Login
-export const login = (email, password) => async (dispatch) => {
+export const login = (phone, password) => async (dispatch) => {
     try {
 
         dispatch({ type: LOGIN_REQUEST })
@@ -52,12 +52,14 @@ export const login = (email, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post('/api/v1/login', { email, password }, config)
+        const { data } = await axios.post('/api/v1/login', { phone, password }, config)
 
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
         })
+
+        
 
     } catch (error) {
         dispatch({
@@ -115,7 +117,7 @@ export const loadUser = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: LOAD_USER_FAIL,
-            payload: error.response.data.message
+            // payload: error.response.data.message
         })
     }
 }

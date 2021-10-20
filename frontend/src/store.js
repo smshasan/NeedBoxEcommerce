@@ -14,7 +14,8 @@ import {
 } from "./reducers/productReducers";
 import categoryReducer from "./reducers/categoryReducers";
 
-import {productSlugReducers} from './reducers/productSlugReducers';
+import { productSlugReducers } from './reducers/productSlugReducers';
+import { discountReducer } from "./reducers/discountReducers";
 
 import {
   authReducer,
@@ -38,7 +39,7 @@ const reducer = combineReducers({
  
   
   productsss: productSlugReducers,
- products: productsReducer,
+  products: productsReducer,
   productDetails: productDetailsReducer,
   newProduct: newProductReducer,
   product: productReducer,
@@ -57,6 +58,7 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   order: orderReducer,
   newReview: newReviewReducer,
+  discount: discountReducer
 });
 
 let initialState = {

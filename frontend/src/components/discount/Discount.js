@@ -1,44 +1,86 @@
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
-import React, { Fragment, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { MDBDataTable } from 'mdbreact'
 import { getAllCategory } from '../../actions/categoryActions'
+import { getDiscountBySlug, clearErrors } from '../../actions/discountActions';
+import { DISCOUNT_PRODUCT_BY_CATEGORY_RESET, } from '../../constants/discountConstants';
+import Sidebar from '../admin/Sidebar';
 
+const Discount = ({match}) => {
 
+    console.log('discountpage', match);
+    const [discount, setDiscount] = useState(0);
 
-const Discount = () => {
+    const dispatch = useDispatch();
+     const {categories} = useSelector((state) => state.category)
+    const { loading, error: updateError, isUpdated } = useSelector(state => state.discount);
 
-    const category = useSelector((state) => state.category)
-    const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAllCategory());
+
+
+        dispatch(getAllCategory(match.params.slug));
+         
         
-    }, [])
+        if (updateError) {
+            alert(updateError);
+            dispatch(clearErrors())
+        }
 
-   const createCategoryList = (categories, options = []) => {
-    for (let category of categories) {
-      options.push({
-        value: category._id,
-        name: category.name,
-        parentId: category.parentId,
-        children: category.children,
-        image: category.images[0].url,
-        slug: category.slug,
+        if (isUpdated) {
+            
+           
+            alert('Product updated successfully');
+            dispatch({ type: DISCOUNT_PRODUCT_BY_CATEGORY_RESET });
+      
+        }
+    }, [dispatch, isUpdated, clearErrors]);
 
-        // type: category.type
-      })
-      if (category.children.length > 0) {
-        createCategoryList(category.children, options)
-      }
+    const submitHandler = (e) => {
+    //  const { match } = props;
+        e.preventDefault();
+
+        const formData = new FormData();
+        
+        formData.set('discount', discount);
+        dispatch(getDiscountBySlug(match.params.slug, formData))
+        
+       
     }
-    return options
-  }
+
 
     return (
-        <Fragment>
-            <h1>Discount</h1>
-        </Fragment>
+        <div>
+            <div className="row">
+                <div className="col-lg-3">
+                    <Sidebar />
+                </div>
+                    <div className="col-lg-3">
+                        <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
+                            <div className="form-group">
+                                                <label htmlFor="discount_field">Set Discount</label>
+                                                <input
+                                                        type="text"
+                                                        id="discount_field"
+                                                        className="form-control"
+                                                        value={discount}
+                                                        onChange={(e) => setDiscount(e.target.value)}
+                                                    />
+                                        <button
+                                                id="login_button"
+                                                type="submit"
+                                                className="btn btn-block py-3"
+                                                disabled={loading ? true : false}
+                                            >
+                                                UPDATE
+                                        </button>
+                            
+                            </div>
+                        </form>
+                </div>
+            </div>
+            
+        </div>
     )
 }
 
