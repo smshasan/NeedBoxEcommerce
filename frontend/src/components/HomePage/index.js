@@ -11,8 +11,11 @@ const HomePage = () => {
   const dispatch = useDispatch()
 
 
+
   useEffect(() => {
-    dispatch(getAllCategory())
+   
+    dispatch(getAllCategory());
+
   }, [])
 
   const createCategoryList = (categories, options = []) => {

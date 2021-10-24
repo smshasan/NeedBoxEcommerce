@@ -8,6 +8,7 @@ import ListReviews from '../components/review/ListReviews'
 
 //related products
 import Product from '../product/Product'
+// import { getProductsBySlug } from '../actions/productActions'
 import { getProducts } from '../actions/productActions'
 
 //import { useAlert } from 'react-alert'
@@ -28,13 +29,14 @@ const ProductDetails = ({ match }) => {
     const { loading, error, product } = useSelector(state => state.productDetails)
     const { user } = useSelector(state => state.auth)
     const { error: reviewError, success } = useSelector(state => state.newReview)
+    const { products,  productsCount, resPerPage } = useSelector(state => state.products)
 
 
-    const { products, productsCount, resPerPage } = useSelector(state => state.products)
+    // const { products } = useSelector(state => state.productsss)
 
     useEffect(() => {
         dispatch(getProductDetails(match.params.id))
-        dispatch(getProducts(match.params.category))
+        dispatch(getProducts())
 
         if (error) {
             alert(error);
@@ -55,7 +57,7 @@ const ProductDetails = ({ match }) => {
 
     const addToCart = () => {
         dispatch(addItemToCart(match.params.id, quantity));
-        alert.success('Item Added to Cart')
+        alert('Item Added to Cart')
     }
 
     const increaseQty = () => {
@@ -127,7 +129,7 @@ const ProductDetails = ({ match }) => {
     }
 
      const filterProduct = () => {
-            return products.filter((x) => x.pro )
+            return products.filter((x) => x.category === product.category )
     }
 
     return (
@@ -244,9 +246,9 @@ const ProductDetails = ({ match }) => {
                             
                                     <div className="col-6  col-md-12">
                                         <div className = "row">
-                                            {products.filter((x)=>x.category).map((product) => (
+                                            {filterProduct().map((y) => (
 
-                                                <Product key = {product?._id} product = {product} col = {3} />
+                                                <Product key = {y?._id} product = {y} col = {3} />
                                                 
                                             ))}
                             

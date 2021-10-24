@@ -103,14 +103,14 @@ function App() {
       <div className="App">
         <Header />
         <MenuHeader />
-        <HomePage />
-       
+        
+        <Route path="/" component={HomePage} exact />
         <div className="cotainer container-fluid">
           
             <Route path ="/:slug"  component={ProductListPage} exact />
 
           
-          <Route path="/" component={HomePage} exact />
+          {/* <Route path="/" component={HomePage} exact /> */}
           
 
             {/* <Route path="/" component={Home} exact /> */}

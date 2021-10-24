@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Loader from '../layout/Loader'
 import MetaData from '../layout/MetaData'
 
+
 //import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
 import { login, clearErrors } from '../../actions/userActions'
@@ -18,21 +19,20 @@ const Login = ({ history, location }) => {
 
     const { isAuthenticated, error, loading } = useSelector(state => state.auth);
 
-    // const redirect = location.search ? location.search.split('=')[1] : '/'
+    const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
 
-        // if (isAuthenticated) {
-        //     history.push(redirect)
-        // }
+        if (isAuthenticated) {
+            history.push(redirect)
+        }
 
         if (error) {
             alert(error);
             dispatch(clearErrors());
         }
 
-    }, [dispatch,  isAuthenticated, error, history]) //redirect
-
+    }, [dispatch,  isAuthenticated, error, history]) 
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(login(phone, password))
@@ -41,7 +41,9 @@ const Login = ({ history, location }) => {
     return (
         <Fragment>
             {loading ? <Loader /> : (
+               
                 <Fragment>
+                     
                     <MetaData title={'Login'} />
 
                     <div className="row wrapper">
