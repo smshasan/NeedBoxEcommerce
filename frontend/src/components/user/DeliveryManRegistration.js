@@ -4,31 +4,29 @@ import React, { Fragment, useState, useEffect } from 'react'
 import MetaData from '../layout/MetaData';
 // import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
-import { register, clearErrors } from '../../actions/userActions'
+import { register, clearErrors } from '../../actions/deliveryManActions'
 
 
-
-const VendorRegistration = ({ history }) => {
+const DeliveryManRegistration = ({ history }) => {
 
     const [user, setUser] = useState({
         name: '',
         phone: '',
-        role: 'vendor',
-        password: '',
-       
+        address: '',
+        nid: '',
+        password: ''
         
     })
 
-
-    const { name, phone, role, password} = user;
+    const { name, phone, address, nid, password } = user;
     const [avatar, setAvatar] = useState('')
     const [avatarPreview, setAvatarPreview] = useState('/images/default_avatar.png')
 
 
     const dispatch = useDispatch();
 
-    const { isAuthenticated, error, loading } = useSelector(state => state.auth);
-    
+    const {isAuthenticated, error, loading } = useSelector(state => state.auth);
+
     useEffect(() => {
         
          if (error) {
@@ -49,9 +47,9 @@ const VendorRegistration = ({ history }) => {
         const formData = new FormData();
         formData.set('name', name);
         formData.set('phone', phone);
-        formData.set('role', role);
+        formData.set('address', address);
+        formData.set('nid', nid);
         formData.set('password', password);
-        
         formData.set('avatar', avatar);
 
 
@@ -80,7 +78,7 @@ const VendorRegistration = ({ history }) => {
     return (
         <Fragment>
 
-            <MetaData title = {'Register User'} />
+            <MetaData title = {'Register Delivery Man'} />
             <div className="row wrapper">
 		<div className="col-10 col-lg-5">
         <form className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>
@@ -98,31 +96,44 @@ const VendorRegistration = ({ history }) => {
                 />
           </div>
 
-           <div className="form-group">
+            <div className="form-group">
               <label htmlFor="phone_field">Phone</label>
               <input
                 type="text"
-                id="phone_field"
+                id="email_field"
                                 className="form-control"
                                 name='phone'
                                 value={phone}
                                 onChange={onChange}
                
               />
-                        </div>
-           <div className="form-group">
-              <label htmlFor="role_field">Role</label>
+            </div>
+            <div className="form-group">
+              <label htmlFor="address_field">Address</label>
               <input
                 type="text"
-                id="role_field"
+                id="address_field"
                                 className="form-control"
-                                name='role'
-                                value='vendor'
+                                name='address'
+                                value={address}
                                 onChange={onChange}
                
               />
                         </div>
                         
+            <div className="form-group">
+              <label htmlFor="nid_field">NID</label>
+              <input
+                type="number"
+                id="nid_field"
+                                className="form-control"
+                                name='nid'
+                                value={nid}
+                                onChange={onChange}
+               
+              />
+            </div>
+  
             <div className="form-group">
               <label htmlFor="password_field">Password</label>
               <input
@@ -134,9 +145,9 @@ const VendorRegistration = ({ history }) => {
                                 onChange={onChange}
               />
             </div>
-                       
+
             <div className='form-group'>
-              <label htmlFor='avatar_upload'>Avatar</label>
+              <label htmlFor='avatar_upload'>Picture</label>
               <div className='d-flex align-items-center'>
                   <div>
                       <figure className='avatar mr-3 item-rtl'>
@@ -178,4 +189,4 @@ const VendorRegistration = ({ history }) => {
     )
 }
 
-export default VendorRegistration
+export default DeliveryManRegistration

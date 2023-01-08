@@ -1,6 +1,6 @@
 import { categoryConstants } from "../constants/categoryConstants";
 
-const initState = {
+const initialState = {
   categories: [],
   loading: false,
   error: null,
@@ -51,9 +51,10 @@ const initState = {
   }
 
   return myCategories;
-};
+}
 
-export default (state = initState, action) => {
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case categoryConstants.GET_ALL_CATEGORIES_SUCCESS:
       state = {
@@ -80,7 +81,7 @@ export default (state = initState, action) => {
       break;
     case categoryConstants.ADD_NEW_CATEGORY_FAILURE:
       state = {
-        ...initState
+        ...initialState
       }
   }
   return state;

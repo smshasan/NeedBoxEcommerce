@@ -7,11 +7,12 @@
     "node": "14.17.3"
   },
   "scripts": {
-    "start": "node backend/server.js",
+    "build": "cd backend && npm install && cd ../frontend && npm install && npm run build",
+    "start": "nodemon backend/server.js",
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
     "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server",
-    "seeder": "node backend/utils/seeder.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix frontend && npm run build --prefix frontend"
+    "seeder": "node backend/utils/seeder.js"
+    
   },
   "author": "S M Siddikur Rahman",
   "license": "ISC",

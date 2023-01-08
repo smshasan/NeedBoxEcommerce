@@ -2,45 +2,39 @@ import React, { Fragment, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { MDBDataTable } from 'mdbreact'
 
-import MetaData from '../layout/MetaData'
-import Loader from '../layout/Loader'
-import Sidebar from './Sidebar'
+import MetaData from '../../layout/MetaData'
+import Loader from '../../layout/Loader'
+import Sidebar from '../Sidebar'
 
 //import { useAlert } from 'react-alert'
 import { useDispatch, useSelector } from 'react-redux'
-import { allUsers, deleteUser, clearErrors } from '../../actions/userActions'
- import { DELETE_USER_RESET } from '../../constants/userConstants'
+import { allDeliveryMen,  clearErrors } from '../../../actions/deliveryManActions'
 
-const UsersList = ({ history }) => {
 
-    //const alert = useAlert();
+const DeliveryManList = ({ history }) => {
+    
     const dispatch = useDispatch();
 
-    const { loading, error, users } = useSelector(state => state.allUsers);
-    const { isDeleted } = useSelector(state => state.user)
 
-    useEffect(() => {
-        dispatch(allUsers());
-
-        if (error) {
-            alert(error);
-            dispatch(clearErrors())
-        }
-
-        if (isDeleted) {
-            alert('User deleted successfully');
-            history.push('/admin/users');
-            dispatch({ type: DELETE_USER_RESET })
-        }
-
-    }, [dispatch, error, history, isDeleted])
-
-    const deleteUserHandler = (id) => {
-        dispatch(deleteUser(id))
-    }
+    const { loading, deliveryMen, error } = useSelector(state => state.allDeliveryMen
+    )
     
-    console.log('users', users)
-    const setUsers = () => {
+    useEffect(() => {
+
+        dispatch(allDeliveryMen());
+
+        if (error)
+        {
+            alert(error);
+            dispatch(clearErrors());
+        }
+
+        
+
+    }, [dispatch, error])
+
+
+    const setDeliveryMen = () => {
         const data = {
             columns: [
                 {
@@ -54,8 +48,8 @@ const UsersList = ({ history }) => {
                     sort: 'asc'
                 },
                 {
-                    label: 'Email',
-                    field: 'email',
+                    label: 'Phone',
+                    field: 'phone',
                     sort: 'asc'
                 },
                 {
@@ -71,17 +65,17 @@ const UsersList = ({ history }) => {
             rows: []
         }
 
-        users.forEach(user => {
+        deliveryMen.forEach(deliveryMan => {
             data.rows.push({
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                role: user.role,
+                id: deliveryMan._id,
+                name: deliveryMan.name,
+                phone: deliveryMan.phone,
+                role: deliveryMan.role,
                 actions: <Fragment>
-                    <Link to={`/admin/user/${user._id}`} className="btn btn-primary py-1 px-2">
+                    <Link to={`/admin/user/${deliveryMen._id}`} className="btn btn-primary py-1 px-2">
                         <i className="fa fa-pencil"></i>
                     </Link>
-                    <button className="btn btn-danger py-1 px-2 ml-2" onClick={() => deleteUserHandler(user._id)}>
+                    <button className="btn btn-danger py-1 px-2 ml-2" >
                         <i className="fa fa-trash"></i>
                     </button>
                 </Fragment>
@@ -92,10 +86,9 @@ const UsersList = ({ history }) => {
         return data;
     }
 
-
     return (
         <Fragment>
-            <MetaData title={'All users'} />
+            <MetaData title={'All Delivery Men'} />
             <div className="row">
                 <div className="col-12 col-md-2">
                     <Sidebar />
@@ -103,11 +96,11 @@ const UsersList = ({ history }) => {
 
                 <div className="col-12 col-md-10">
                     <Fragment>
-                        <h1 className="my-5">All Users</h1>
+                        <h1 className="my-5">All Delivery Men</h1>
 
                         {loading ? <Loader /> : (
                             <MDBDataTable
-                                data={setUsers()}
+                                data={setDeliveryMen()}
                                 className="px-3"
                                 bordered
                                 striped
@@ -123,4 +116,4 @@ const UsersList = ({ history }) => {
     )
 }
 
-export default UsersList
+export default DeliveryManList

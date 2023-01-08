@@ -5,7 +5,7 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 const APIFeatures = require('../utils/apiFeatures');
 const cloudinary = require('cloudinary');
 const Category = require('../models/category');
-const { updateMany } = require('../models/product');
+// const { updateMany } = require('../models/product');
 
 
 // Create new product => /api/v1/admin/product/new
@@ -29,6 +29,7 @@ exports.newProduct = catchAsyncErrors(async (req, res, next) => {
             public_id: result.public_id,
             url: result.secure_url
         })
+        
     }
 
     req.body.images = imagesLinks
@@ -68,6 +69,7 @@ exports.getDiscountBySlug = (req, res) => {
     Category.findOne({ slug: slug })
         .select('_id')
         .exec((error, category) => {
+            
             if (error) return res.status(400).json({ error });
 
             if (category) {
@@ -86,7 +88,6 @@ exports.getDiscountBySlug = (req, res) => {
                     })
             }
                 
-
             // res.status(200).json({ category });
     })
 }

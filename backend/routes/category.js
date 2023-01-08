@@ -28,3 +28,4 @@ router.route('/category/update').put(isAuthenticatedUser, authorizeRoles('admin'
 router.route('/category/delete').delete(isAuthenticatedUser, authorizeRoles('admin'), deleteCategories)
 
 module.exports = router;
+

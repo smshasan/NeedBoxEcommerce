@@ -24,21 +24,7 @@ const NewProduct = ({ history }) => {
 
     const [categoryId, setCategoryId] = useState('');
 
-    // const categories = [
-    //     'Electronics',
-    //     'Cameras',
-    //     'Laptops',
-    //     'Accessories',
-    //     'Headphones',
-    //     'Food',
-    //     "Books",
-    //     'Clothes/Shoes',
-    //     'Beauty/Health',
-    //     'Sports',
-    //     'Outdoor',
-    //     'Home',
-    //     'Fruits'
-    // ]
+    
 
     //const alert = useAlert();
     const dispatch = useDispatch();
@@ -51,7 +37,6 @@ const NewProduct = ({ history }) => {
     // For vendors
     const { user } = useSelector(state => state.auth)
 
-
     useEffect(() => {
 
         dispatch(getAllCategory());
@@ -63,7 +48,7 @@ const NewProduct = ({ history }) => {
 
         if (success) {
             if (user.role === 'admin') history.push('/admin/products');
-            if (user.role==='vendor') history.push('/vendor/products');
+            if (user.role === 'vendor') history.push('/vendor/products');
             alert('Product created successfully');
             dispatch({ type: NEW_PRODUCT_RESET })
         }
@@ -126,7 +111,6 @@ const NewProduct = ({ history }) => {
     return options;
   };
 
-
     return (
         <Fragment>
             <MetaData title={'New Product'} />
@@ -134,7 +118,6 @@ const NewProduct = ({ history }) => {
                 <div className="col-12 col-md-2">
                     <Sidebar />
                 </div>
-
                 <div className="col-12 col-md-10">
                     <Fragment>
                         <div className="wrapper my-5">
@@ -151,7 +134,6 @@ const NewProduct = ({ history }) => {
                                         onChange={(e) => setName(e.target.value)}
                                     />
                                 </div>
-
                                 <div className="form-group">
                                     <label htmlFor="price_field">Price</label>
                                     <input
@@ -172,15 +154,12 @@ const NewProduct = ({ history }) => {
                                         onChange={(e) => setDiscount(e.target.value)}
                                     />
                                 </div>
-
                                 <div className="form-group">
                                     <label htmlFor="description_field">Description</label>
                                     <textarea className="form-control" id="description_field" rows="8" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                                 </div>
-
                                 <div className="form-group">
                                     <label htmlFor="category_field">Category</label>
-
                                      <select
                                         className="form-control"
                                         value={categoryId}
@@ -193,7 +172,6 @@ const NewProduct = ({ history }) => {
                                         </option>
                                         ))}
                                     </select>
-
                                     {/* <select className="form-control" id="category_field" value={category} onChange={(e) => setCategory(e.target.value)}>
                                         {categories.map(category => (
                                             <option key={category} value={category} >{category}</option>
@@ -246,7 +224,6 @@ const NewProduct = ({ history }) => {
 
                                 </div>
 
-
                                 <button
                                     id="login_button"
                                     type="submit"
@@ -261,7 +238,6 @@ const NewProduct = ({ history }) => {
                     </Fragment>
                 </div>
             </div>
-
         </Fragment>
     )
 }

@@ -87,8 +87,8 @@ const Register = ({ history }) => {
                     id="name_field"
                     className="form-control"
                     name='name'
-                                value={name}
-                                onChange={onChange}
+                    value={name}
+                    onChange={onChange}
                 />
           </div>
 
@@ -97,10 +97,10 @@ const Register = ({ history }) => {
               <input
                 type="text"
                 id="email_field"
-                                className="form-control"
-                                name='phone'
-                                value={phone}
-                                onChange={onChange}
+                className="form-control"
+                name='phone'
+                value={phone}
+                onChange={onChange}
                
               />
             </div>

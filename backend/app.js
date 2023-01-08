@@ -11,28 +11,36 @@ const errorMiddleware = require('./middlewares/errors');
 
 //setting up config file
 if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'backend/config/config.env' })
+
+
 app.use(express.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use(fileUpload());
 
 
 
 
 //import all routes
+const slider = require('./routes/slider');
 const products = require('./routes/product');
 const auth = require('./routes/auth');
 const payment = require('./routes/payment');
 const order = require('./routes/order');
 const category = require('./routes/category');
+const driver = require('./routes/driver');
+
 
 
 // app.use('/public', express.static(path.join(__dirname, 'uploads')));
+app.use('/api/v1', slider);
 app.use('/api/v1', products);
 app.use('/api/v1', auth);
 app.use('/api/v1', payment);
 app.use('/api/v1', order);
 app.use('/api/v1', category);
+app.use('/api/v1', driver);
 
 if (process.env.NODE_ENV === 'PRODUCTION') {
     app.use(express.static(path.join(__dirname, '../frontend/build')))
@@ -45,5 +53,6 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
 
 //Middleware to handle errors
 app.use(errorMiddleware);
+
 
 module.exports = app; 

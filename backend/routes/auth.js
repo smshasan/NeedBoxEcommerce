@@ -16,7 +16,7 @@ const { registerUser,
 
 } = require('../controllers/authController');
 
-const { isAuthenticatedUser, authorizeRoles } = require('..//middlewares/auth');
+const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth');
 //const { updateProfile } = require('../../frontend/src/actions/userActions');
 
 router.route('/register').post(registerUser);

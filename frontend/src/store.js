@@ -3,7 +3,11 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import {
- 
+  getSliderReducer,
+  newSliderReducer
+} from "./reducers/sliderReducers";
+
+import {
   productsReducer,
   newProductReducer,
   productReducer,
@@ -12,6 +16,7 @@ import {
   productReviewsReducer,
   reviewReducer,
 } from "./reducers/productReducers";
+
 import categoryReducer from "./reducers/categoryReducers";
 
 import { productSlugReducers } from './reducers/productSlugReducers';
@@ -25,6 +30,9 @@ import {
   userDetailsReducer,
 } from "./reducers/userReducers";
 
+//Delivery Man Reducer
+import {deliveryManReducer, allDeliveryMenReducer} from './reducers/deliveryManReducers';
+
 import { cartReducer } from "./reducers/cartReducers";
 
 import {
@@ -37,7 +45,8 @@ import {
 
 const reducer = combineReducers({
  
-  
+  getSlider: getSliderReducer,
+  newSlider: newSliderReducer,
   productsss: productSlugReducers,
   products: productsReducer,
   productDetails: productDetailsReducer,
@@ -58,7 +67,10 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   order: orderReducer,
   newReview: newReviewReducer,
-  discount: discountReducer
+  discount: discountReducer,
+  deliveryMan: deliveryManReducer,
+  allDeliveryMen: allDeliveryMenReducer
+
 });
 
 let initialState = {

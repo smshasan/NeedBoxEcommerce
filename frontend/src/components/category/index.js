@@ -178,7 +178,8 @@ const Category = (props) => {
             onChange={(e) => setParentCategoryId(e.target.value)}
           >
             <option>select category</option>
-            {createCategoryList(category.categories).map((option) => (
+            {
+            (category.categories).map((option) => (
               <option key={option.value} value={option.value}>
                 {option.name}
               </option>

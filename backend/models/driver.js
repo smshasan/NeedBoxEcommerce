@@ -1,56 +1,42 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const crypto = require('crypto');
 
-
-
-const userSchema = new mongoose.Schema({
+const driverSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Please enter name'],
+        required: [true, 'Please enter your name'],
         maxLength: [30, 'Your name cannot exceed 30 characters']
     },
+
     phone: {
         type: String,
-        required: [true, 'Please enter  valid 11 digit number'],
+        required: [true, 'Please enter valid 11 digit number'],
         unique: true
-        // validate: [validator.isEmail, 'Please enter valid email']
     },
-    // email: {
-    //     type: String,
-    //     required: [true, 'Please enter email'],
-    //     unique: true,
-    //     validate: [validator.isEmail, 'Please enter valid email']
-    // },
 
-    // phone: {
-    //     type: String,
-    //     unique: true,
-    //     minLength: [5, 'Phone Number must not be less than 11 digit'],
-    //     required: true
-    // },
+    Address: {
+        type: String,
+        // required: [false, 'Please enter valid address'],
+        maxLength: [100, 'Address  cannot exceed 100 characters']
+    },
 
-    // address: {
-    //     type: String,
-    //     maxLength: [100, 'address must not exceed 100 characters'],
-    //     required: true
-    // },
-
-    // shopAddress: {
-    //     type: String,
-    //     maxLength: [100, 'address must not exceed 100 characters'],
-    //     required: true
-
-    // },
+    nid: {
+        type: String,
+        requred: [true, 'Please enter your valid NID or birth certificate number'],
+        minLength: [10, 'NID number cannot be less than 10 characters'],
+        unique: true
+    },
 
     password: {
         type: String,
         required: [true, 'Please enter password'],
-        minLength: [6, 'Your password must be longer than  6 characters'],
+        minLength: [8, 'password must be longer than 8 characters'],
         select: false
     },
+
     avatar: {
         public_id: {
             type: String,
@@ -61,11 +47,13 @@ const userSchema = new mongoose.Schema({
             required: true      // true
         }
     },
+
     role: {
-            type: String,
-            default: 'user'
-        },
-        createdAt: {
+        type: String,
+        default: 'delivery man'
+    },
+
+      createdAt: {
             type: Date,
             default: Date.now
         },
@@ -75,7 +63,7 @@ const userSchema = new mongoose.Schema({
 })
 
 //Encrypting Password before saving
-userSchema.pre('save', async function (next) {
+driverSchema.pre('save', async function (next) {
     if (!this.isModified('password')) {
         next()
     }
@@ -83,13 +71,13 @@ userSchema.pre('save', async function (next) {
 })
 
 // Compares user password
-userSchema.methods.comparePassword = async function (enteredPassword) {
+driverSchema.methods.comparePassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
 
 //Return JWT Token
-userSchema.methods.getJwtToken = function () {
+driverSchema.methods.getJwtToken = function () {
     return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
         expiresIn: '72h'
     });
@@ -97,7 +85,7 @@ userSchema.methods.getJwtToken = function () {
 
 
 // Generating password reset token
-userSchema.methods.getResetPasswordToken = function () {
+driverSchema.methods.getResetPasswordToken = function () {
     // Generate token
     const resetToken = crypto.randomBytes(20).toString('hex');
 
@@ -109,5 +97,4 @@ userSchema.methods.getResetPasswordToken = function () {
     return resetToken
 }
 
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Driver', driverSchema);

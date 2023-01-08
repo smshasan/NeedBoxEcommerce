@@ -84,12 +84,6 @@ const Header = () => {
                                 )} */}
 
 
-
-
-
-
-
-
                                 {/* if(user){
                                     if(user.role === 'admin' || user.role === 'vendor'){
                                         <Link className="dropdown-item" to="/dashboard">Dashboard</Link>

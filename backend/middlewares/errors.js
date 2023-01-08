@@ -18,6 +18,7 @@ module.exports = (err, req, res, next) => {
 
     //Shows errors in production mode
     if (process.env.NODE_ENV === 'PRODUCTION') {
+        
         let error = { ...err }
         
         error.message = err.message

@@ -7,13 +7,13 @@ import Input from '../../UI/Input';
 
 const MenuHeader = () => {
 
-    const category = useSelector(state => state.category);
+  const category = useSelector(state => state.category);
   const dispatch = useDispatch();
   console.log('categor', category);
 
     useEffect (() => {
         dispatch(getAllCategory());
-    }, []);
+    }, [dispatch]);
 
     const renderCategories = (categories) => {
     let myCategoriess = [];
@@ -49,9 +49,9 @@ const MenuHeader = () => {
                 </ul>
             </div>
         </div>
-        </Fragment>
+      </Fragment>
         
     )
 }
 
-export default MenuHeader
+export default MenuHeader;

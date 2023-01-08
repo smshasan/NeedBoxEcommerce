@@ -1,7 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllCategory } from '../../actions/categoryActions'
-import ImageSlider from '../layout/ImageSlider'
+// import ImageSlider from '../layout/ImageSlider'
+
+import Slider from '../layout/Slider';
+
 import Product from '../../product/Product'
 import { Link } from 'react-router-dom'
 import { Card, Button, CardGroup } from 'react-bootstrap'
@@ -41,8 +44,10 @@ const HomePage = () => {
   return (
     <Fragment>
       <div>
-              <div className = "container">
-                        <ImageSlider/>
+        <div className="container">
+          <div style={{height: '280'}}>
+                <Slider />
+                </div>
               </div>
               <Fragment>
                  <div className="container">

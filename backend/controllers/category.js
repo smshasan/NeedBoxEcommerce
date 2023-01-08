@@ -72,9 +72,6 @@ exports.addCategory = catchAsyncErrors( async (req, res, next) => {
 })
 
 
-
-
-
 exports.getCategories = (req, res) => {
   Category.find({}).exec((error, categories) => {
     if (error) return res.status(400).json({ error });
