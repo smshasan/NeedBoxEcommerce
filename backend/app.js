@@ -1,7 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
-const cors = require('cors');
+app.use(cors());
+
 
 const cookieParser = require('cookie-parser');
 const bodyparser = require('body-parser')
@@ -16,7 +18,6 @@ if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({ path: 'bac
 
 
 app.use(express.json());
-app.use(cors());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
