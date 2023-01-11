@@ -1,10 +1,13 @@
 import axios from "axios";
 import { categoryConstants } from "../constants/categoryConstants";
-var url = 'https://needboxbd.onrender.com/'
+
+
+
 export const getAllCategory = () => {
+
   return async (dispatch) => {
     dispatch({ type: categoryConstants.GET_ALL_CATEGORIES_REQUEST });
-    const res = await axios.get(`url+/api/v1/category/getCategory`);
+    const res = await axios.get(`https://needboxbd.onrender.com/api/v1/category/getCategory`);
     console.log(res);
     if (res.status === 200) {
       const { categoryList } = res.data;
@@ -19,13 +22,17 @@ export const getAllCategory = () => {
         payload: { error: res.data.error },
       });
     }
-  };
-};
+  }
+
+}
+
+
+
 
 export const addCategory = (form) => {
   return async dispatch => {
     dispatch({ type: categoryConstants.ADD_NEW_CATEGORY_REQUEST})
-    const res = await axios.post(`url+/api/v1/category/create`, form);
+    const res = await axios.post(`https://needboxbd.onrender.com/api/v1/category/create`, form);
     console.log('addCategory', res)
     if (res.status === 201) {
       dispatch({
