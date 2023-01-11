@@ -45,7 +45,7 @@ export const getProductsBySlug = (slug) => {
         try {
             dispatch({ type: GET_PRODUCTS_BY_SLUG_REQUEST });
             // const res = await axios.get(`/api/v1/products/${slug}`);
-            const { data } = await axios.get(`https://needboxbd.onrender.com/api/v1/products/${slug}`);
+            const { data } = await axios.get(`/api/v1/products/${slug}`);
             console.log('slug', data);
      
             dispatch({
@@ -73,7 +73,7 @@ export const getProducts = (keyword = '', currentPage = 1, price, category, rati
         dispatch({ type: ALL_PRODUCTS_REQUEST })
 
 
-        let link = `https://needboxbd.onrender.com/api/v1/products`
+        let link = `/api/v1/products`
         // let link = `url+/api/v1/products?page=${currentPage}`
     //     if (price) {
     //         link = `/api/v1/products?&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}`
