@@ -39,7 +39,7 @@ import {
 
 } from '../constants/productConstants';
 
-let url = 'https://needboxbd.onrender.com/'
+var url = 'https://needboxbd.onrender.com/'
 export const getProductsBySlug = (slug) => {
     return async (dispatch) => {
         try {
