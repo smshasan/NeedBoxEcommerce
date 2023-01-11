@@ -23,7 +23,7 @@ export const newSlider = (sliderData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post(`/api/v1/admin/createSlider`, sliderData, config)
+        const { data } = await axios.post(`https://needboxbd.onrender.com/api/v1/admin/createSlider`, sliderData, config)
 
         dispatch({
             type: NEW_SLIDER_SUCCESS,
@@ -47,7 +47,7 @@ export const getSlider = () => async (dispatch) => {
 
         
 
-        const { data } = await axios.get(`/api/v1/admin/getSlider`)
+        const { data } = await axios.get(`https://needboxbd.onrender.com/api/v1/admin/getSlider`)
         console.log('sliderAction',data)
 
         dispatch({

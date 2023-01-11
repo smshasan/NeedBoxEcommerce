@@ -36,7 +36,7 @@ export const login = (phone, password) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post('/api/v1/login/deliveryMan', { phone, password }, config)
+        const { data } = await axios.post('https://needboxbd.onrender.com/api/v1/login/deliveryMan', { phone, password }, config)
 
         dispatch({
             type: DELIVERY_MAN_LOGIN_SUCCESS,
@@ -66,7 +66,7 @@ export const register = (userData) => async (dispatch) => {
             }
         }
 
-        const { data } = await axios.post('/api/v1/register/deliveryMan', userData, config)
+        const { data } = await axios.post('https://needboxbd.onrender.com/api/v1/register/deliveryMan', userData, config)
         console.log('DeliveryManReg', data);
         dispatch({
             type: DELIVERY_MAN_REGISTRATION_SUCCESS,
@@ -89,7 +89,7 @@ export const allDeliveryMen = () => async (dispatch) => {
 
         dispatch({ type: ALL_DELIVERYMEN_REQUEST})
 
-        const { data } = await axios.get('/api/v1/admin/deliveryMen')
+        const { data } = await axios.get('https://needboxbd.onrender.com/api/v1/admin/deliveryMen')
         console.log('deliverymen', data);
 
         dispatch({

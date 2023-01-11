@@ -19,7 +19,7 @@ export const getDiscountBySlug = (slug, productData) => async (dispatch) => {
 
         // const res = await axios.get(`/api/v1/discount/${slug}`);
         // destructuring
-        const { data } = await axios.post(`/api/v1/discount/${slug}`, productData, config);
+        const { data } = await axios.post(`https://needboxbd.onrender.com/api/v1/discount/${slug}`, productData, config);
         console.log('discount', data);
 
         dispatch({
